@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.saas.billing</groupId>
 	<artifactId>billing-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>billing-api</name>
 	<description>SaaS billing api for local bills</description>
 	<url/>
