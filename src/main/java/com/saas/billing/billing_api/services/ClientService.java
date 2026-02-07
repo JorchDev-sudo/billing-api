@@ -1,7 +1,7 @@
 package com.saas.billing.billing_api.services;
 
-import com.saas.billing.billing_api.dtos.requests.ClientCreateRequest;
-import com.saas.billing.billing_api.dtos.requests.ClientUpdateRequest;
+import com.saas.billing.billing_api.dtos.requests.client.CreateClientRequest;
+import com.saas.billing.billing_api.dtos.requests.client.UpdateClientRequest;
 import com.saas.billing.billing_api.dtos.responses.ClientResponse;
 import com.saas.billing.billing_api.entities.Client;
 import com.saas.billing.billing_api.mappers.ClientMapper;
@@ -27,7 +27,7 @@ public class ClientService {
         this.clientMapper = clientMapper;
     }
 
-    public ClientResponse create(ClientCreateRequest request){
+    public ClientResponse create(CreateClientRequest request){
         if (clientRepository.existsByEmail(request.email) ||
                 clientRepository.existsByIdentification(request.identification)) {
             throw new EntityExistsException();
@@ -39,7 +39,7 @@ public class ClientService {
         return clientMapper.toResponse(savedClient);
     }
 
-    public ClientResponse update(String email, ClientUpdateRequest request) {
+    public ClientResponse update(String email, UpdateClientRequest request) {
         Client client = clientRepository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException(email));;
 
@@ -48,5 +48,9 @@ public class ClientService {
         Client updated = clientRepository.save(client);
 
         return clientMapper.toResponse(updated);
+    }
+
+    public void delete(Client client){
+        clientRepository.delete(client);
     }
 }

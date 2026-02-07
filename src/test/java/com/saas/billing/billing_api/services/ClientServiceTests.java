@@ -1,6 +1,6 @@
 package com.saas.billing.billing_api.services;
 
-import com.saas.billing.billing_api.dtos.requests.ClientCreateRequest;
+import com.saas.billing.billing_api.dtos.requests.client.CreateClientRequest;
 import com.saas.billing.billing_api.dtos.responses.ClientResponse;
 import com.saas.billing.billing_api.entities.Client;
 import com.saas.billing.billing_api.mappers.ClientMapper;
@@ -29,7 +29,7 @@ public class ClientServiceTests {
 
     @Test
     public void shouldCreateClient(){
-        ClientCreateRequest request = new ClientCreateRequest(
+        CreateClientRequest request = new CreateClientRequest(
                 "example",
                 "example@email.com",
                 "1234");
@@ -61,7 +61,7 @@ public class ClientServiceTests {
 
     @Test
     void shouldThrowExceptionWhenEmailAlreadyExists() {
-        ClientCreateRequest request = new ClientCreateRequest(
+        CreateClientRequest request = new CreateClientRequest(
                 "example",
                 "example@email.com",
                 "1234"
@@ -80,7 +80,7 @@ public class ClientServiceTests {
 
     @Test
     void shouldThrowExceptionWhenIdentificationAlreadyExists() {
-        ClientCreateRequest request = new ClientCreateRequest(
+        CreateClientRequest request = new CreateClientRequest(
                 "example",
                 "example@email.com",
                 "1234"

@@ -1,6 +1,6 @@
 package com.saas.billing.billing_api.controllers;
 
-import com.saas.billing.billing_api.dtos.requests.ClientCreateRequest;
+import com.saas.billing.billing_api.dtos.requests.client.CreateClientRequest;
 import com.saas.billing.billing_api.dtos.responses.ClientResponse;
 import com.saas.billing.billing_api.services.ClientService;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientResponse> postClient(ClientCreateRequest request){
+    public ResponseEntity<ClientResponse> postClient(CreateClientRequest request){
         return ResponseEntity.status(201).body(clientService.create(request));
 
     }

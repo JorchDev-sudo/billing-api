@@ -1,6 +1,6 @@
 package com.saas.billing.billing_api.controllers;
 
-import com.saas.billing.billing_api.dtos.requests.ClientCreateRequest;
+import com.saas.billing.billing_api.dtos.requests.client.CreateClientRequest;
 import com.saas.billing.billing_api.dtos.responses.ClientResponse;
 import com.saas.billing.billing_api.services.ClientService;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class ClientControllerTest {
                 "example@email.com"
         );
 
-        when(clientService.create(any(ClientCreateRequest.class)))
+        when(clientService.create(any(CreateClientRequest.class)))
                 .thenReturn(response);
 
         mockMvc.perform(post("/api/client")
@@ -48,7 +48,7 @@ class ClientControllerTest {
                         .with(user("test"))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(
-                                new ClientCreateRequest("example", "example@email.com", "UUID")
+                                new CreateClientRequest("example", "example@email.com", "UUID")
                         )))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("example"))

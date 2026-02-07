@@ -1,11 +1,11 @@
-package com.saas.billing.billing_api.dtos.requests;
+package com.saas.billing.billing_api.dtos.requests.client;
 
-public class ClientCreateRequest {
+public class CreateClientRequest {
     public String name;
     public String email;
     public String identification;
 
-    public ClientCreateRequest(
+    public CreateClientRequest(
             String name,
             String email,
             String identification){
