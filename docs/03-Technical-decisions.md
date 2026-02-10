@@ -203,6 +203,40 @@ Documentar **proceso, decisiones y arquitectura desde el día uno**.
 * Mayor disciplina
 
 ---
+## Decisión 08 — Integración Continua (CI) desde etapas tempranas
+### Contexto
+
+A medida que el proyecto crece, incluso en fase MVP, se vuelve necesario garantizar que cada cambio en el código mantenga un estado mínimo de calidad y estabilidad, sin depender de ejecuciones manuales ni validaciones locales.
+
+### Alternativas consideradas
+
+Ejecutar builds y tests manualmente
+
+Añadir CI/CD solo en fases avanzadas
+
+Incorporar despliegue automático desde el inicio
+
+### Decisión
+
+Implementar una pipeline básica de Integración Continua (CI) desde etapas tempranas del proyecto.
+
+### Justificación
+
+Validación automática de compilación y tests
+
+Detección temprana de errores
+
+Refuerza la disciplina técnica desde el inicio
+
+Sienta las bases para un futuro CD sin complejidad prematura
+
+### Consecuencias
+
+El código debe mantenerse siempre en un estado “buildable”
+
+Los tests dejan de ser opcionales
+
+Cualquier fallo en la pipeline bloquea el avance hasta ser corregido
 
 ## 📌 Nota final
 
