@@ -1,12 +1,14 @@
 package com.saas.billing.billing_api.services;
 
-import com.saas.billing.billing_api.dtos.requests.ClientCreateRequest;
+import com.saas.billing.billing_api.dtos.requests.client.CreateClientRequest;
+import com.saas.billing.billing_api.dtos.requests.client.UpdateClientRequest;
 import com.saas.billing.billing_api.dtos.responses.ClientResponse;
 import com.saas.billing.billing_api.entities.Client;
 import com.saas.billing.billing_api.mappers.ClientMapper;
 import com.saas.billing.billing_api.repositories.ClientRepository;
 import com.saas.billing.billing_api.utils.UtilService;
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,17 +27,30 @@ public class ClientService {
         this.clientMapper = clientMapper;
     }
 
-    public ClientResponse create(ClientCreateRequest request){
-        if (clientRepository.existsByEmail(request.email)) {
-            throw new EntityExistsException("Client with email: " + request.email + " exists");
-        }
-        if (clientRepository.existsByIdentification(request.identification)){
-            throw new EntityExistsException("Client with identification: " + request.identification + "exists");
+    public ClientResponse create(CreateClientRequest request){
+        if (clientRepository.existsByEmail(request.email) ||
+                clientRepository.existsByIdentification(request.identification)) {
+            throw new EntityExistsException();
         }
 
         Client newClient = clientMapper.toEntity(request);
         Client savedClient = clientRepository.save(newClient);
 
         return clientMapper.toResponse(savedClient);
+    }
+
+    public ClientResponse update(String email, UpdateClientRequest request) {
+        Client client = clientRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException(email));;
+
+        clientMapper.toUpdate(request, client);
+
+        Client updated = clientRepository.save(client);
+
+        return clientMapper.toResponse(updated);
+    }
+
+    public void delete(Client client){
+        clientRepository.delete(client);
     }
 }

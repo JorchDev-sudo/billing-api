@@ -7,9 +7,9 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name = "clients")
 @Getter
 @Setter
+@Table(name = "clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
